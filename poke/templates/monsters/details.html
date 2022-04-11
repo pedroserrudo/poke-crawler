@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{%  block meta %}
+    <title>{{ object.name|title }} - Pokemon</title>
+{% endblock meta %}
+
+{% block content %}
+    <div id="pokemon-detail" class="my-60">
+
+        <div class="bg-white relative shadow-xl w-11/12 md:w-4/6  lg:w-4/6 xl:w-4/6 mx-auto">
+            <div class="flex">
+                <a href="/"><- Home</a>
+            </div>
+            <div class="flex justify-center">
+                <img src="{{ object.avatar }}"
+                     alt="{{ object.name }}"
+                     class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-2xl border-4 border-white">
+            </div>
+
+            <div class="mt-16">
+                <h1 class="font-bold text-center text-3xl text-gray-900">{{ object.name|title }}</h1>
+                <p class="text-center text-sm text-gray-400 font-medium">{{ object.details }}</p>
+
+                <div class="my-5">
+                    <a href="{% url 'monsters-detail' object.id %}?catch=gogo"
+                       class="text-indigo-200 block text-center font-medium leading-6 px-6 py-3 bg-indigo-600">
+                        Try to Catch <span class="font-bold">{{ object.name|title }}!</span>
+                    </a>
+                    <p class="text-center">
+                        <span>
+                            {% if many > 0  %}
+                                You have caught this pokemon {{ many }} {{ many|pluralize:"time,times" }}.
+                            {% else %}
+                                You never caught this pokemon.
+                            {% endif %}
+                        </span>
+                    </p>
+                </div>
+                <div class="flex justify-evenly my-5">
+                    <a href=""
+                       class="bg font-bold text-sm text-blue-800 w-full text-center py-3 hover:bg-blue-800 hover:text-white hover:shadow-lg">Weight: {{ object.weight }}</a>
+                    <a href=""
+                       class="bg font-bold text-sm text-blue-400 w-full text-center py-3 hover:bg-blue-400 hover:text-white hover:shadow-lg">Height: {{ object.height }}</a>
+                    <a href=""
+                       class="bg font-bold text-sm text-yellow-600 w-full text-center py-3 hover:bg-yellow-600 hover:text-white hover:shadow-lg">Order: {{ object.order }}</a>
+                    <a href=""
+                       class="bg font-bold text-sm text-gray-600 w-full text-center py-3 hover:bg-gray-600 hover:text-white hover:shadow-lg">Experience: {{ object.base_experience }}</a>
+                </div>
+
+                <div class="w-full">
+                    <h3 class="font-bold text-gray-600 text-left px-4">Actions</h3>
+                    <div class="mt-5 w-full">
+                        {% for move in object.moves.all %}
+                            <a href="#"
+                               class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+                                <h3>{{ move.name|title }}</h3>
+                                <p class="text-gray-400 text-sm">{{ move.short_effect }}</p>
+                            </a>
+                        {% empty %}
+                            <span>No actions.</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    {% if catch == 'catch' %}
+        alert('Holy smokes! \nYou caught a {{ object.name|title }}')
+    {% elif catch == 'miss' %}
+        alert('You missed!\n{{ object.name|title }} used "{{ move.name|default_if_none:'run'|title }}" to escape. \nTry again.')
+    {% endif %}
+    </script>
+{% endblock content %}

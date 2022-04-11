@@ -8,3 +8,12 @@ Some useful commands:
 * `docker-compose exec web bash`
 * `docker-compose exec web python -m pip install -r requirements.txt`
 
+
+Pokemon commands:
+
+* `python manage.py pokemon bootstrap`
+* `python manage.py pokemon update-random`
+* `python manage.py pokemon update <id>`
+* `python manage.py pokemon update-all`
+
+
