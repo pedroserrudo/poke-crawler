@@ -113,6 +113,7 @@ class PokeCrawler:
                     'image': item_details['sprites']['default'] if item_details['sprites'] else None
                 }
             )
+            item_ids.append(item_obj.pk)
 
         # Check Items M2M relations and set correct items if it's not set yet
         if poke.held_items.filter(pk__in=item_ids).count() != len(item_ids):
