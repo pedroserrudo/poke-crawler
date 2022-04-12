@@ -1,0 +1,1 @@
+*/1 * * * * python /code/manage.py pokemon update-random
