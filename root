@@ -1,1 +1,2 @@
 */1 * * * * python /code/manage.py pokemon update-random
+0 */6 * * * python /code/manage.py pokemon bootstrap

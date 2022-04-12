@@ -79,7 +79,7 @@ class PokeCrawler:
         move_ids = []
         for move in details['moves']:
             move_details = self.get_monster_details(api_url=move['move']['url'])
-            print(f'Update Move {move_details["name"]}#{move_details["id"]} ')
+            #print(f'Update Move {move_details["name"]}#{move_details["id"]} ')
             obj, _ = Move.objects.update_or_create(
                 pk=move_details['id'],
                 defaults={
@@ -103,7 +103,7 @@ class PokeCrawler:
         item_ids = []
         for item in details['held_items']:
             item_details = self.get_monster_items(api_url=item['item']['url'])
-            print(f'Update Item {item_details["name"]}#{item_details["id"]}')
+            #print(f'Update Item {item_details["name"]}#{item_details["id"]}')
             item_obj, _ = HeldItem.objects.update_or_create(
                 pk=item_details['id'],
                 defaults={
